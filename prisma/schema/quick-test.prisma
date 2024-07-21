@@ -1,0 +1,75 @@
+enum Title {
+    MR
+    MS
+    MRS
+    MISS
+}
+
+type Age {
+    years  String
+    months String
+    days   String
+}
+
+enum Gender {
+    MALE
+    FEMALE
+}
+
+type Address {
+    street String
+    city   String
+    zip    String
+}
+
+type PatientDetails {
+    title      Title
+    firstName  String
+    middleName String?
+    lastName   String
+    age        Age
+    gender     Gender
+    phone      String?
+    email      String?
+    address    Address?
+    referredBy String
+}
+
+enum SampleType {
+    BLOOD
+    URINE
+    STOOL
+    SWAB
+    OTHER
+}
+
+type Test {
+    id         Int
+    name       String
+    result     Json
+    price      Float
+    sampleType SampleType
+}
+
+enum PaymentMethod {
+    CASH
+    CARD
+    CHEQUE
+    ONLINE
+}
+
+type PaymentDetails {
+    total          Float
+    discount       Float
+    totalPayble    Float
+    initialPayment Float
+    balance        Float
+    paymentMethod  PaymentMethod
+}
+
+model QuickTest {
+    id             String         @id @default(auto()) @map("_id") @db.ObjectId
+    patientDetails PatientDetails
+    selectedTests  Test[]
+    paymentDetails PaymentDetails
+}
